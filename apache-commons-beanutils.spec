@@ -4,7 +4,7 @@
 
 Name:           apache-%{short_name}
 Version:        1.8.3
-Release:        5
+Release:        4
 Summary:        Java utility methods for accessing and modifying the properties of arbitrary JavaBeans
 License:        ASL 2.0
 Group:          Development/Java
@@ -16,7 +16,7 @@ Source1:        %{short_name}.depmap
 
 BuildRequires:  apache-commons-logging >= 0:1.0
 BuildRequires:  java >= 0:1.6.0
-BuildRequires:  jpackage-utils >= 0:1.7.5
+BuildRequires:  jpackage-utils > 0:1.7.2
 BuildRequires:  maven-plugin-bundle
 BuildRequires:  maven-surefire-maven-plugin
 BuildRequires:  maven-surefire-provider-junit
@@ -34,8 +34,8 @@ BuildRequires:  jakarta-commons-collections-testframework >= 0:2.0
 BuildRequires:  jakarta-commons-collections >= 0:2.0
 Requires:       jakarta-commons-collections >= 0:2.0
 Requires:       apache-commons-logging >= 0:1.0
-Requires(post):    jpackage-utils >= 0:1.7.5
-Requires(postun):  jpackage-utils >= 0:1.7.5
+Requires(post):    jpackage-utils
+Requires(postun):  jpackage-utils
 Requires:       java >= 0:1.6.0
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -53,7 +53,7 @@ is very lightweight.
 %package javadoc
 Summary:        Javadoc for %{name}
 Group:          Development/Java
-Requires:       jpackage-utils >= 0:1.7.5
+Requires:       jpackage-utils
 
 Provides:       jakarta-%{short_name}-javadoc = 0:%{version}-%{release}
 Obsoletes:      jakarta-%{short_name}-javadoc <= 0:1.7.0
