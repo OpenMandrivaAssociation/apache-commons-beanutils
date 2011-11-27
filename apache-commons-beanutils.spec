@@ -4,7 +4,7 @@
 
 Name:           apache-%{short_name}
 Version:        1.8.3
-Release:        4
+Release:        6
 Summary:        Java utility methods for accessing and modifying the properties of arbitrary JavaBeans
 License:        ASL 2.0
 Group:          Development/Java
