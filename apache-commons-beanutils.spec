@@ -78,15 +78,15 @@ mvn-jpp -Dmaven2.jpp.depmap.file="%{SOURCE1}" \
 
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 # jars
-install -d -m 755 $RPM_BUILD_ROOT%{_javadir}
-install -m 644 target/%{short_name}-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{name}-%{version}.jar
-install -m 644 target/%{short_name}-bean-collections-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{name}-bean-collections-%{version}.jar
-install -m 644 target/%{short_name}-core-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{name}-core-%{version}.jar
+install -d -m 755 %{buildroot}%{_javadir}
+install -m 644 target/%{short_name}-%{version}.jar %{buildroot}%{_javadir}/%{name}-%{version}.jar
+install -m 644 target/%{short_name}-bean-collections-%{version}.jar %{buildroot}%{_javadir}/%{name}-bean-collections-%{version}.jar
+install -m 644 target/%{short_name}-core-%{version}.jar %{buildroot}%{_javadir}/%{name}-core-%{version}.jar
 
-pushd $RPM_BUILD_ROOT%{_javadir}
+pushd %{buildroot}%{_javadir}
 for jar in *-%{version}*; do
     ln -sf ${jar} `echo $jar| sed "s|apache-||g"`
     ln -sf ${jar} `echo $jar| sed "s|-%{version}||g"`
@@ -94,8 +94,8 @@ for jar in *-%{version}*; do
 done
 popd # come back from javadir
 
-install -d -m 755 $RPM_BUILD_ROOT%{_mavenpomdir}
-install -pm 644 pom.xml $RPM_BUILD_ROOT%{_mavenpomdir}/JPP-%{short_name}.pom
+install -d -m 755 %{buildroot}%{_mavenpomdir}
+install -pm 644 pom.xml %{buildroot}%{_mavenpomdir}/JPP-%{short_name}.pom
 
 %add_to_maven_depmap org.apache.commons %{short_name} %{version} JPP %{short_name}
 %add_to_maven_depmap org.apache.commons %{short_name}-core %{version} JPP %{short_name}
@@ -108,14 +108,14 @@ install -pm 644 pom.xml $RPM_BUILD_ROOT%{_mavenpomdir}/JPP-%{short_name}.pom
 %add_to_maven_depmap %{short_name} %{short_name}-bean-collections %{version} JPP %{short_name}
 
 # javadoc
-install -d -m 755 $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
-cp -pr target/site/apidocs/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
+install -d -m 755 %{buildroot}%{_javadocdir}/%{name}-%{version}
+cp -pr target/site/apidocs/* %{buildroot}%{_javadocdir}/%{name}-%{version}
 %{__ln_s} %{name}-%{version} %{buildroot}%{_javadocdir}/%{name}
 
 
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %post
 %update_maven_depmap
