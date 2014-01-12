@@ -1,3 +1,2 @@
 sources:
-  "commons-beanutils-1.8.3-src.tar.gz:"	36c6327980dd4c073b126c972d0300573d2d8fe6
-  "commons-beanutils.depmap:"	0ca54a39b1ea1dc143592107cca012a89dd8b739
+  commons-beanutils-1.8.3-src.tar.gz: 36c6327980dd4c073b126c972d0300573d2d8fe6
