@@ -4,7 +4,7 @@
 
 Name:           apache-%{short_name}
 Version:        1.8.3
-Release:        11.1%{?dist}
+Release:        11.2
 Summary:        Java utility methods for accessing and modifying the properties of JavaBeans
 License:        ASL 2.0
 URL:            http://commons.apache.org/%{base_name}
@@ -15,7 +15,7 @@ BuildRequires:  maven-local
 BuildRequires:  mvn(commons-collections:commons-collections)
 BuildRequires:  mvn(commons-collections:commons-collections-testframework)
 BuildRequires:  mvn(commons-logging:commons-logging)
-BuildRequires:  mvn(org.apache.commons:commons-parent)
+BuildRequires:  mvn(org.apache.commons:commons-parent:pom:)
 
 Provides:       jakarta-%{short_name} = 0:%{version}-%{release}
 Obsoletes:      jakarta-%{short_name} <= 0:1.7.0
