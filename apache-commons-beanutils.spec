@@ -4,7 +4,7 @@
 
 Name:           apache-%{short_name}
 Version:        1.8.3
-Release:        11.2
+Release:        11.3
 Summary:        Java utility methods for accessing and modifying the properties of JavaBeans
 License:        ASL 2.0
 URL:            http://commons.apache.org/%{base_name}
