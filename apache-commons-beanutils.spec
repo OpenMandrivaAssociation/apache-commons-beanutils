@@ -7,7 +7,7 @@ Version:        1.8.3
 Release:        11.3
 Summary:        Java utility methods for accessing and modifying the properties of JavaBeans
 License:        ASL 2.0
-URL:            http://commons.apache.org/%{base_name}
+URL:            https://commons.apache.org/%{base_name}
 BuildArch:      noarch
 Source0:        http://archive.apache.org/dist/commons/%{base_name}/source/%{short_name}-%{version}-src.tar.gz
 
