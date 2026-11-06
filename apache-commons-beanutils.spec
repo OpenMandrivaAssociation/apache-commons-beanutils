@@ -1,13 +1,18 @@
 Name:		apache-commons-beanutils
-Version:	1.9.4
+Version:	1.11.0
 Release:	1
 Summary:	Utility methods for reading and writing JavaBeans properties
 Group:		Development/Java
 License:	ASL 2.0
 URL:		https://commons.apache.org/proper/commons-beanutils/
-Source0:	https://archive.apache.org/dist/commons/beanutils/source/commons-beanutils-%{version}-src.tar.gz
+Source0:	https://github.com/apache/commons-beanutils/archive/refs/tags/rel/commons-beanutils-%{version}.tar.gz#/commons-beanutils-%{version}.tar.gz
+
 BuildArch:	noarch
-BuildRequires:	python
+# The site checkout profile is active when site-content is absent, and
+# antrun is on the sysjar keep list.
+%global sysjar_drops --drop org.apache.maven.plugins:maven-antrun-plugin
+BuildRequires:	mvn(org.apache.commons:commons-parent:pom::)
+BuildRequires:	mvn(org.apache:apache:pom::)
 BuildRequires:	mvn(commons-logging:commons-logging)
 BuildRequires:	mvn(commons-collections:commons-collections)
 # Literal, so the first rpmbuild -bs records them before sysjar is installed.
@@ -18,28 +23,13 @@ BuildOption(install):	--file-name commons-beanutils --link %{name}
 
 %description
 Apache Commons BeanUtils wraps reflection and introspection for
-JavaBeans. 1.9.4 adds SuppressPropertiesBeanIntrospector, which
-Velocity Tools imports. Commons Parent 47 is not used.
+JavaBeans. 1.11.0 needs Java 8 and adds
+SuppressPropertiesBeanIntrospector.SUPPRESS_DECLARING_CLASS.
+BeanComparator and ResultSetIterator throw a narrower exception
+instead of RuntimeException. Tests are skipped.
 
 %prep
-%autosetup -n commons-beanutils-%{version}-src
-# Parent 47 is not the packaged commons-parent. Flattening drops the
-# versionless site plugins that parent would otherwise keep.
-python - <<'PY'
-import xml.etree.ElementTree as ET
-NS = "http://maven.apache.org/POM/4.0.0"
-ET.register_namespace("", NS)
-
-def local(tag):
-    return tag.split("}", 1)[-1]
-
-tree = ET.parse("pom.xml")
-root = tree.getroot()
-for node in list(root):
-    if local(node.tag) == "parent":
-        root.remove(node)
-tree.write("pom.xml", encoding="utf-8", xml_declaration=True)
-PY
+%autosetup -n commons-beanutils-rel-commons-beanutils-%{version}
 
 %files -f .mfiles
 %doc LICENSE.txt NOTICE.txt RELEASE-NOTES.txt README.md
